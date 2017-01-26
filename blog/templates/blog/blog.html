@@ -1,0 +1,32 @@
+{% extends "personal/header.html" %}
+
+{% block content %}
+	{% for post in object_list %}
+	<h5> {{ post.date|date:"Y-m-d"}} <a href="/blog/{{post.id}}"> {{post.title}}</a></h5>
+	{% endfor %}
+	
+	<div>
+{% if post.has_other_pages %}
+  <ul class="pagination">
+    {% if object_list.has_previous %}
+      <li><a href="?page={{ object_list.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in users.paginator.page_range %}
+      {% if users.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if users.has_next %}
+      <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</div>
+
+{% endblock %}

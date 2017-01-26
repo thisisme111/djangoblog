@@ -1,0 +1,26 @@
+{% extends "personal/header.html" %}
+
+{% block content %}
+	<p>hgo</p>
+	{% for u in users %}
+	<h5> {{ u.date|date:"Y-m-d"}} <a href="/blog/{{post.id}}"> {{u.title}}</a></h5>
+	{% endfor %}
+	
+	
+<div class="pagination">
+    <span class="step-links">
+        {% if users.has_previous %}
+            <a href="?page={{ users.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ users.number }} of {{ users.paginator.num_pages }}.
+        </span>
+
+        {% if users.has_next %}
+            <a href="?page={{ users.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}
